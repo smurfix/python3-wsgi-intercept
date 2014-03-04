@@ -1,0 +1,5 @@
+wsgi-intercept (0.6.1-1) smurf; urgency=low
+
+  * source package automatically created by stdeb 0.6.0+git
+
+ -- Titus Brown, Kumar McMillan, Chris Dent <cdent@peermore.com>  Tue, 04 Mar 2014 11:44:54 +0100
