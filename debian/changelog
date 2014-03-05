@@ -1,5 +1,12 @@
-wsgi-intercept (0.6.1-1) smurf; urgency=low
+python-wsgi-intercept (0.6.1-1) unstable; urgency=medium
 
-  * source package automatically created by stdeb 0.6.0+git
+  * New upstream release (Closes: #740720).
+  * Fixed debian/copyright as per FTP masters suggestion.
 
- -- Titus Brown, Kumar McMillan, Chris Dent <cdent@peermore.com>  Tue, 04 Mar 2014 11:44:54 +0100
+ -- Thomas Goirand <zigo@debian.org>  Fri, 01 Nov 2013 14:34:15 +0800
+
+python-wsgi-intercept (0.5.1-1) unstable; urgency=low
+
+  * Initial release. (Closes: #725031)
+
+ -- Thomas Goirand <zigo@debian.org>  Tue, 01 Oct 2013 01:05:06 +0800

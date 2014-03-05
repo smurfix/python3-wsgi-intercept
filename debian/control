@@ -1,31 +1,33 @@
-Source: wsgi-intercept
-Maintainer: Titus Brown, Kumar McMillan, Chris Dent <cdent@peermore.com>
+Source: python-wsgi-intercept
 Section: python
 Priority: optional
-Build-Depends: python-setuptools (>= 0.6b3), python-all (>= 2.6.6-3), debhelper (>= 7)
-Standards-Version: 3.9.1
+Maintainer: PKG OpenStack <openstack-devel@lists.alioth.debian.org>
+Uploaders: Julien Danjou <acid@debian.org>,
+           Thomas Goirand <zigo@debian.org>,
+           Mehdi Abaakouk <sileht@sileht.net>
+Build-Depends: debhelper (>= 9),
+               openstack-pkg-tools,
+               python-all (>= 2.6.6-3~),
+               python-setuptools
+Standards-Version: 3.9.4
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=openstack/python-wsgi-intercept.git
+Vcs-Git: git://anonscm.debian.org/openstack/python-wsgi-intercept.git
+Homepage: http://code.google.com/p/wsgi-intercept/
 
 Package: python-wsgi-intercept
 Architecture: all
+Pre-Depends: dpkg (>= 1.15.6~)
 Depends: ${misc:Depends}, ${python:Depends}
-Description: wsgi_intercept installs a WSGI application in place of a rea
- installs a WSGI application in place of a real URI for testing.
+Recommends: ${python:Recommends}
+Description: installs a WSGI application in place of a real URI for testing
+ Testing a WSGI application normally involves starting a server at a local host
+ and port, then pointing your test code to that address. Instead, this library
+ lets you intercept calls to any specific host/port combination and redirect
+ them into a WSGI application importable by your test program. Thus, you can
+ avoid spawning multiple processes or threads to test your Web app.
  .
- Introduction
- ============
- .
- Testing a WSGI application normally involves starting a server at a
- local host and port, then pointing your test code to that address.
- Instead, this library lets you intercept calls to any specific host/port
- combination and redirect them into a `WSGI application`_ importable by
- your test program. Thus, you can avoid spawning multiple processes or
- threads to test your Web app.
- .
- How Does It Work?
- =================
- .
- ``wsgi_intercept`` works by replacing ``httplib.HTTPConnection`` with a
- subclass, ``wsgi_intercept.WSGI_HTTPConnection``. This class then
- redirects specific server/port combinations into a WSGI application by
- emulating a socket. If no intercept is registered for the host and port
- requested, those requests are passed on to the standard handler.
+ wsgi_intercept works by replacing httplib.HTTPConnection with a subclass,
+ wsgi_intercept.WSGI_HTTPConnection. This class then redirects specific
+ server/port combinations into a WSGI application by emulating a socket. If no
+ intercept is registered for the host and port requested, those requests are
+ passed on to the standard handler.
