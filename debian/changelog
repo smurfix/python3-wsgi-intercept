@@ -1,3 +1,9 @@
+python-wsgi-intercept (0.6.1+smurf2-1) smurf; urgency=low
+
+  * Fix 2
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Wed, 05 Mar 2014 11:17:32 +0100
+
 python-wsgi-intercept (0.6.1+smurf1-1) smurf; urgency=low
 
   * try to fix requests intercept.
