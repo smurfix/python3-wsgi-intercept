@@ -40,8 +40,10 @@ def install():
 
     http_lib.HTTPConnection = HTTP_WSGIInterceptor
     http_lib.HTTPSConnection = HTTPS_WSGIInterceptor
+    http_lib.HTTP._connection_class = HTTP_WSGIInterceptor
 
 
 def uninstall():
     http_lib.HTTPConnection = OriginalHTTPConnection
     http_lib.HTTPSConnection = OriginalHTTPSConnection
+    http_lib.HTTP._connection_class = OriginalHTTPConnection
