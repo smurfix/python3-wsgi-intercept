@@ -13,15 +13,15 @@ InterceptorMixin = WSGI_HTTPConnection
 wsgi_fake_socket.settimeout = lambda self, timeout: None
 
 
-class HTTP_WSGIInterceptor(InterceptorMixin, HTTPConnection):
-    pass
-
-
-class HTTPS_WSGIInterceptor(InterceptorMixin, HTTPSConnection):
-    pass
-
-
 def install():
+    class HTTP_WSGIInterceptor(InterceptorMixin, HTTPConnection):
+        pass
+
+
+    class HTTPS_WSGIInterceptor(InterceptorMixin, HTTPSConnection):
+        pass
+
+
     HTTPConnectionPool.ConnectionCls = HTTP_WSGIInterceptor
     HTTPSConnectionPool.ConnectionCls = HTTPS_WSGIInterceptor
 

@@ -22,25 +22,22 @@ except ImportError:
 
 HTTPInterceptorMixin = WSGI_HTTPConnection
 HTTPSInterceptorMixin = WSGI_HTTPSConnection
-
-
-class HTTP_WSGIInterceptor(HTTPInterceptorMixin, http_lib.HTTPConnection):
-    pass
-
-
-class HTTPS_WSGIInterceptor(HTTPSInterceptorMixin, http_lib.HTTPSConnection,
-        HTTP_WSGIInterceptor):
-
-    def __init__(self, host, **kwargs):
-        self.host = host
-        try:
-            self.port = kwargs['port']
-        except KeyError:
-            self.port = None
-        HTTP_WSGIInterceptor.__init__(self, host, **kwargs)
-
-
+    
 def install():
+    class HTTP_WSGIInterceptor(HTTPInterceptorMixin, http_lib.HTTPConnection):
+        pass
+    
+    class HTTPS_WSGIInterceptor(HTTPSInterceptorMixin, http_lib.HTTPSConnection,
+            HTTP_WSGIInterceptor):
+    
+        def __init__(self, host, **kwargs):
+            self.host = host
+            try:
+                self.port = kwargs['port']
+            except KeyError:
+                self.port = None
+            HTTP_WSGIInterceptor.__init__(self, host, **kwargs)
+
     http_lib.HTTPConnection = HTTP_WSGIInterceptor
     http_lib.HTTPSConnection = HTTPS_WSGIInterceptor
 
