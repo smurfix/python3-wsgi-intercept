@@ -423,14 +423,14 @@ class WSGI_HTTPConnection(HTTPConnection):
     Intercept all traffic to certain hosts & redirect into a WSGI
     application object.
 
-	Initialization works like `HTTPConnection`, except that you may pass in
-	additional name=value pairs which will be stored in the environment
-	that's passed to your WSGI app.
+    Initialization works like `HTTPConnection`, except that you may pass in
+    additional name=value pairs which will be stored in the environment
+    that's passed to your WSGI app.
     """
-	
-	def __init__(self, host, port, environ):
-		self.environ = environ
-		super(WSGI_HTTPConnection,self).__init__(host, port)
+    
+    def __init__(self, host, port, environ):
+        self.environ = environ
+        super(WSGI_HTTPConnection,self).__init__(host, port)
 
     def get_app(self, host, port):
         """
