@@ -295,11 +295,12 @@ class wsgi_fake_socket:
         data has been sent to the socket by the request class;
      2. non-persistent (i.e. non-HTTP/1.1) connections.
     """
-    def __init__(self, app, host, port, script_name):
+    def __init__(self, app, host, port, script_name, **environ):
         self.app = app                  # WSGI app object
         self.host = host
         self.port = port
         self.script_name = script_name  # SCRIPT_NAME (app mount point)
+        self.environ = environ
 
         self.inp = BytesIO()           # stuff written into this "socket"
         self.write_results = []          # results from the 'write_fn'
@@ -351,6 +352,7 @@ class wsgi_fake_socket:
 
         # build the environ dictionary.
         environ = make_environ(inp, self.host, self.port, self.script_name)
+        environ.update(self.environ)
 
         # run the application.
         app_result = self.app(environ, start_response)
@@ -420,7 +422,16 @@ class WSGI_HTTPConnection(HTTPConnection):
     """
     Intercept all traffic to certain hosts & redirect into a WSGI
     application object.
+
+    Initialization works like `HTTPConnection`, except that you may pass in
+    additional name=value pairs which will be stored in the environment
+    that's passed to your WSGI app.
     """
+    
+    def __init__(self, host, port, environ):
+        self.environ = environ
+        super(WSGI_HTTPConnection,self).__init__(host, port)
+
     def get_app(self, host, port):
         """
         Return the app object for the given (host, port).
@@ -453,7 +464,7 @@ class WSGI_HTTPConnection(HTTPConnection):
                     sys.stderr.write('INTERCEPTING call to %s:%s\n' %
                                      (self.host, self.port,))
                 self.sock = wsgi_fake_socket(app, self.host, self.port,
-                                             script_name)
+                                             script_name, self.environ)
             else:
                 HTTPConnection.connect(self)
 
@@ -505,7 +516,7 @@ class WSGI_HTTPSConnection(HTTPSConnection, WSGI_HTTPConnection):
                     sys.stderr.write('INTERCEPTING call to %s:%s\n' %
                                      (self.host, self.port,))
                 self.sock = wsgi_fake_socket(app, self.host, self.port,
-                                             script_name)
+                                             script_name, self.environ)
             else:
                 HTTPSConnection.connect(self)
 
