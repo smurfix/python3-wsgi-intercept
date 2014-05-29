@@ -1,3 +1,9 @@
+python-wsgi-intercept (0.6.1+smurf3-1) smurf; urgency=medium
+
+  * WSGI environment pass-thru
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Thu, 29 May 2014 19:08:55 +0200
+
 python-wsgi-intercept (0.6.1+smurf2-1) smurf; urgency=low
 
   * Fix 2
