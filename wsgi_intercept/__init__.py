@@ -430,7 +430,7 @@ class WSGI_HTTPConnection(HTTPConnection):
     
     def __init__(self, host, port, environ):
         self.environ = environ
-        super(WSGI_HTTPConnection,self).__init__(host, port)
+        HTTPConnection.__init__(host, port)
 
     def get_app(self, host, port):
         """
