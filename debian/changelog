@@ -1,3 +1,9 @@
+python-wsgi-intercept (0.6.1+smurf4-1) smurf; urgency=medium
+
+  * Don't use super() with old-style class
+
+ -- Matthias Urlichs <matthias@urlichs.de>  Fri, 30 May 2014 12:13:47 +0200
+
 python-wsgi-intercept (0.6.1+smurf3-1) smurf; urgency=medium
 
   * WSGI environment pass-thru
